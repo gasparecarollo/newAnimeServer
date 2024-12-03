@@ -5,13 +5,15 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "db:schema": "psql -U postgres -f db/schema.sql"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.6",
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "pg-promise": "^11.10.2"
   }
 }
