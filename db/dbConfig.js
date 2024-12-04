@@ -1,4 +1,4 @@
-const pgp = require('pg-promise');
+const pgp = require('pg-promise')();
 require('dotenv').config();
 
 const [PG_HOST, PG_USER, PG_DATABASE, PG_PORT] = process.env;
