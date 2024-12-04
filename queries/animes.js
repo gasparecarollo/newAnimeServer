@@ -10,6 +10,6 @@ const getAllAnimes = async () => {
 }
 
 
-modeule.exports = {
+module.exports = {
     getAllAnimes
 }

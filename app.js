@@ -3,7 +3,7 @@ const app = express();
 const animesController = require("./controllers/animes");
 
 app.get("/", (req, res) => {
-    response.send("Welcome to Animania");
+    res.send("Welcome to Animania");
 })
 
 //CRUD
