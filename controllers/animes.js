@@ -2,7 +2,11 @@ const express = require('express');
 const animesArr = require("../data/animes")
 const animes = express.Router();
 const {
-    getAllAnimes
+    getAllAnimes,
+    getOneAnime,
+    createOneAnime,
+    updateOneAnime,
+    deleteOneAnime,
 } = require('../queries/animes');
 
 animes.get("/", async (req, res) => {
@@ -12,8 +16,46 @@ animes.get("/", async (req, res) => {
     } catch (error) {
         res.status(404).json({ payload: error })
     }
+});
+animes.get("/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const anime = await getOneAnime(id);
+        res.status(200).json({ payload: anime })
+    } catch (error) {
+        res.status(404).json({ payload: error })
+    }
+});
+animes.post("/", async (req, res) => {
+    try {
+        const anime = req.body;
+        const newAnime = await createOneAnime(anime)
+        res.status(201).json({ payload: newAnime })
+    } catch (error) {
+        res.status(404).json({ payload: error })
+    }
+});
+
+animes.put("/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const anime = req.body;
+        const updatedAnime = await updateOneAnime(id, anime);
+        res.status(200).json({ payload: updatedAnime })
+    } catch (error) {
+        res.status(404).json({ payload: error })
+    }
 })
 
+animes.delete("/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedAnime = await deleteOneAnime(id);
+        res.status(200).json({ payload: animes })
+    } catch (error) {
+        res.status(404).json({ payload: error })
+    }
+})
 
 // animes.get("/animes", (req, res) => {
 //     console.log(animesArr)
@@ -84,4 +126,8 @@ animes.get("/", async (req, res) => {
 // });
 
 
-module.exports = animes;
+module.exports = {
+    getAllAnimes,
+    getOneAnime,
+    createOneAnime
+}
